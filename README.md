@@ -33,7 +33,7 @@
 5. __sql_queries.py__ contains all your sql queries, and is imported into the last three files above.
 6. __README.md__ provides discussion on your project.
 
-## **State and justify your database schema design and ETL pipeline ** 
+## **Database schema design and ETL pipeline ** 
 
 > #### Fact Table
 1. songplays - records in log data associated with song plays i.e. records with page NextSong
