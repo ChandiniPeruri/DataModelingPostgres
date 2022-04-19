@@ -28,10 +28,10 @@
 **Explanation of files in the repository** 
 > __test.ipynb__ displays the first few rows of each table to let you check your database.
 > __create_tables.py__ drops and creates your tables. You run this file to reset your tables before each time you run your ETL scripts.
-> \_etl.ipynb_\ reads and processes a single file from song_data and log_data and loads the data into your tables. This notebook contains detailed instructions on the ETL process for each of the tables.
-> \_etl.py_\ reads and processes files from song_data and log_data and loads them into your tables. You can fill this out based on your work in the ETL notebook.
-> \_sql_queries.py_\ contains all your sql queries, and is imported into the last three files above.
-> \_README.md_\ provides discussion on your project.
+> __etl.ipynb__ reads and processes a single file from song_data and log_data and loads the data into your tables. This notebook contains detailed instructions on the ETL process for each of the tables.
+> __etl.py__ reads and processes files from song_data and log_data and loads them into your tables. You can fill this out based on your work in the ETL notebook.
+> __sql_queries.py__ contains all your sql queries, and is imported into the last three files above.
+> __README.md__ provides discussion on your project.
 
 **State and justify your database schema design and ETL pipeline ** 
 >Fact Table
@@ -49,7 +49,8 @@ artist_id, name, location, latitude, longitude
 start_time, hour, day, week, month, year, weekday
 
 **Provide example queries and results for song play analysis** 
-`SELECT * FROM songplays
+
+> `SELECT * FROM songplays
 WHERE song_id IS NOT NULL`
 
 >Output:
