@@ -56,4 +56,4 @@ WHERE song_id IS NOT NULL`
 
 >Output:
 
-
+![Screen Shot 2022-04-18 at 5 31 36 PM](https://user-images.githubusercontent.com/17342090/163897373-2a001f47-7e57-4d3e-b5d5-7c34a4cfab38.png)
