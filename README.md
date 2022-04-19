@@ -2,30 +2,30 @@
 > To create Postgres database schema and ETL pipeline to analyze Sparkify song data for new music streaming app
 
 ## Table of contents
-* [Overview of Project]
-* [Purpose]
-* [Setup]
+* Overview
+* Purpose
+* Setup
 
-## **Overview**
+### Overview
 > Define Fact and Dimension tables for a star schema 
 > Write an ETL pipeline to transfer JSON data into Postgres using Python and SQL
 > Understand what songs customers are listening to
 
-## **Pupose of Sparkify Database**
+### Pupose of Sparkify Database
 > This database is designed to optimize queries on song play analysis for analytics team. They are particularly interested in understanding what songs users are listening to.
 > In order to simplify the querying process, JSON data has been loaded into Fact and Dimension tables.
 
-## **How to run Python scripts**
+### How to run Python scripts
 > Make sure you have installed python 
 > To run create_tables.py file
-     - open terminal, go to the file location
-     - run the command "python create_tables.py"
+     1. open terminal, go to the file location
+     2. run the command "python create_tables.py"
 
 > To run etl.py file
-    - open terminal, go to the file location
-    - run the command "python etl.py"
+    1. open terminal, go to the file location
+    2. run the command "python etl.py"
 
-## **Explanation of files in the repository** 
+### Explanation of files in the repository 
 1. __test.ipynb__ displays the first few rows of each table to let you check your database.
 2. __create_tables.py__ drops and creates your tables. You run this file to reset your tables before each time you run your ETL scripts.
 3. __etl.ipynb__ reads and processes a single file from song_data and log_data and loads the data into your tables. This notebook contains detailed instructions on the ETL process for each of the tables.
@@ -33,7 +33,7 @@
 5. __sql_queries.py__ contains all your sql queries, and is imported into the last three files above.
 6. __README.md__ provides discussion on your project.
 
-## **Database schema design and ETL pipeline** 
+### Database schema design and ETL pipeline
 
 > #### Fact Table
 1. songplays - records in log data associated with song plays i.e. records with page NextSong
@@ -49,7 +49,7 @@ artist_id, name, location, latitude, longitude
 4. time - timestamps of records in songplays broken down into specific units
 start_time, hour, day, week, month, year, weekday
 
-## **Provide example queries and results for song play analysis** 
+## Provide example queries and results for song play analysis
 
 > `SELECT * FROM songplays
 WHERE song_id IS NOT NULL`
