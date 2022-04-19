@@ -6,16 +6,16 @@
 * [Purpose]
 * [Setup]
 
-**Overview**
+## **Overview**
 > Define Fact and Dimension tables for a star schema 
 > Write an ETL pipeline to transfer JSON data into Postgres using Python and SQL
 > Understand what songs customers are listening to
 
-**Pupose of Sparkify Database**
+## **Pupose of Sparkify Database**
 > This database is designed to optimize queries on song play analysis for analytics team. They are particularly interested in understanding what songs users are listening to.
 > In order to simplify the querying process, JSON data has been loaded into Fact and Dimension tables.
 
-**How to run Python scripts**
+## **How to run Python scripts**
 > Make sure you have installed python 
 > To run create_tables.py file
     > open terminal, go to the file location
@@ -25,20 +25,21 @@
     > open terminal, go to the file location
     > run the command "python etl.py"
 
-**Explanation of files in the repository** 
-> __test.ipynb__ displays the first few rows of each table to let you check your database.
-> __create_tables.py__ drops and creates your tables. You run this file to reset your tables before each time you run your ETL scripts.
-> __etl.ipynb__ reads and processes a single file from song_data and log_data and loads the data into your tables. This notebook contains detailed instructions on the ETL process for each of the tables.
-> __etl.py__ reads and processes files from song_data and log_data and loads them into your tables. You can fill this out based on your work in the ETL notebook.
-> __sql_queries.py__ contains all your sql queries, and is imported into the last three files above.
-> __README.md__ provides discussion on your project.
+##**Explanation of files in the repository** 
+1. __test.ipynb__ displays the first few rows of each table to let you check your database.
+2. __create_tables.py__ drops and creates your tables. You run this file to reset your tables before each time you run your ETL scripts.
+3. __etl.ipynb__ reads and processes a single file from song_data and log_data and loads the data into your tables. This notebook contains detailed instructions on the ETL process for each of the tables.
+4. __etl.py__ reads and processes files from song_data and log_data and loads them into your tables. You can fill this out based on your work in the ETL notebook.
+5. __sql_queries.py__ contains all your sql queries, and is imported into the last three files above.
+6. __README.md__ provides discussion on your project.
 
-**State and justify your database schema design and ETL pipeline ** 
->Fact Table
+##**State and justify your database schema design and ETL pipeline ** 
+
+> ####Fact Table
 1. songplays - records in log data associated with song plays i.e. records with page NextSong
 songplay_id, start_time, user_id, level, song_id, artist_id, session_id, location, user_agent
 
->Dimension Tables
+> ####Dimension Tables
 1. users - users in the app
 user_id, first_name, last_name, gender, level
 2. songs - songs in music database
@@ -48,7 +49,7 @@ artist_id, name, location, latitude, longitude
 4. time - timestamps of records in songplays broken down into specific units
 start_time, hour, day, week, month, year, weekday
 
-**Provide example queries and results for song play analysis** 
+##**Provide example queries and results for song play analysis** 
 
 > `SELECT * FROM songplays
 WHERE song_id IS NOT NULL`
