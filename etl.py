@@ -9,17 +9,30 @@ def process_song_file(cur, filepath):
     '''Reads songs JSON data line by line and inserts 
     them as records into songs and artists tables.'''
     # open song file
-    df = pd.read_json(filepath, lines = True)
+    try:
+        df = pd.read_json(filepath, lines = True)
+    except:
+        print("Error: Couldn't read song source file")
+        print(e)
 
     # insert song record
     song_data = df[['song_id', 'title', 'artist_id', 'year', 'duration']].values[0].tolist()
-    cur.execute(song_table_insert, song_data)
+    try:
+        cur.execute(song_table_insert, song_data)
+    except:
+        print("Error: Inserting Song table data")
+        print(e)
     
     # insert artist record
-    artist_data = df[['artist_id', 'artist_name', 'artist_location', 'artist_latitude', 'artist_longitude']].values[0].tolist()
-    cur.execute(artist_table_insert, artist_data)
+    artist_data = df[['artist_id', 'artist_name', 'artist_location', 'artist_latitude', 
+                      'artist_longitude']].values[0].tolist()
+    try:
+        cur.execute(artist_table_insert, artist_data)
+    except:
+        print("Error: Inserting artist table data")
+        print(e)
 
-
+        
 def process_log_file(cur, filepath):
     '''Reads logs JSON data line by line and inserts 
     them as records into time and users tables. It
@@ -27,7 +40,11 @@ def process_log_file(cur, filepath):
     into songplays table'''
     
     # open log file
-    df = pd.read_json(filepath, lines = True)
+    try:
+        df = pd.read_json(filepath, lines = True)
+    except:
+        print("Error: Couldn't read log source file")
+        print(e)
 
     # filter by NextSong action
     df = df[df['page'] == 'NextSong']
@@ -36,25 +53,37 @@ def process_log_file(cur, filepath):
     t = pd.to_datetime(df['ts'], unit= 'ms', infer_datetime_format=True)
     
     # insert time data records
-    time_data = (t.dt.time, t.dt.hour, t.dt.day, t.dt.isocalendar().week, t.dt.month, t.dt.year, t.dt.day_name())
+    time_data = (t.dt.time, t.dt.hour, t.dt.day, t.dt.isocalendar().week, t.dt.month, 
+                 t.dt.year, t.dt.day_name())
     column_labels = ('Time', 'Hour', 'Day', 'Week', 'Month', 'Year', 'WeekDay')
     time_df = pd.DataFrame.from_dict({column_labels[i]: time_data[i] for i in range(len(time_data))})
-    
-    for i, row in time_df.iterrows():
-        cur.execute(time_table_insert, list(row))
-
+    try:
+        for i, row in time_df.iterrows():
+            cur.execute(time_table_insert, list(row))
+    except:
+        print("Error: Inserting time data")
+        print(e)
+        
     # load user table
     user_df = df[['userId', 'firstName', 'lastName', 'gender', 'level']]
 
     # insert user records
-    for i, row in user_df.iterrows():
-        cur.execute(user_table_insert, row)
+    try:
+        for i, row in user_df.iterrows():
+            cur.execute(user_table_insert, row)
+    except:
+        print("Error: Inserting time data")
+        print(e)
 
     # insert songplay records
     for index, row in df.iterrows():
         
         # get songid and artistid from song and artist tables
-        cur.execute(song_select, (row.song, row.artist, row.length))
+        try:
+            cur.execute(song_select, (row.song, row.artist, row.length))
+        except:
+            print("Error: Selecting song data")
+            print(e)
         results = cur.fetchone()
         
         if results:
@@ -64,8 +93,11 @@ def process_log_file(cur, filepath):
             
         # insert songplay record
         songplay_data = (pd.to_datetime(row.ts, unit = 'ms'), row.userId, row.level, songid, artistid, row.sessionId, row.location, row.userAgent)
-        cur.execute(songplay_table_insert, songplay_data) 
-
+        try:
+            cur.execute(songplay_table_insert, songplay_data) 
+        except:
+            print("Error: Inserting songplay data")
+            print(e)
 
 def process_data(cur, conn, filepath, func):
     '''Gets all JSON files, loops through 
@@ -83,10 +115,14 @@ def process_data(cur, conn, filepath, func):
     print('{} files found in {}'.format(num_files, filepath))
 
     # iterate over files and process
-    for i, datafile in enumerate(all_files, 1):
-        func(cur, datafile)
-        conn.commit()
-        print('{}/{} files processed.'.format(i, num_files))
+    try:
+        for i, datafile in enumerate(all_files, 1):
+            func(cur, datafile)
+            conn.commit()
+            print('{}/{} files processed.'.format(i, num_files))
+    except:
+        print("Error: processing data")
+        print(e)
 
 
 def main():
@@ -106,9 +142,18 @@ def main():
     conn.set_session(autocommit=True)
     
     # process song data
-    process_data(cur, conn, filepath='data/song_data', func=process_song_file)
-    # process log data 
-    process_data(cur, conn, filepath='data/log_data', func=process_log_file)
+    try:
+        process_data(cur, conn, filepath='data/song_data', func=process_song_file)
+    except:
+        print("Error: Couldn't process song data")
+        print(e)
+        
+    # process log data
+    try:
+        process_data(cur, conn, filepath='data/log_data', func=process_log_file)
+    except:
+        print("Error: Couldn't process log data")
+        print(e)
 
     conn.close()
 
