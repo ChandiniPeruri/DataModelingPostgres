@@ -18,12 +18,12 @@
 ## **How to run Python scripts**
 > Make sure you have installed python 
 > To run create_tables.py file
-    > open terminal, go to the file location
-    > run the command "python create_tables.py"
+     - open terminal, go to the file location
+     - run the command "python create_tables.py"
 
 > To run etl.py file
-    > open terminal, go to the file location
-    > run the command "python etl.py"
+    - open terminal, go to the file location
+    - run the command "python etl.py"
 
 ## **Explanation of files in the repository** 
 1. __test.ipynb__ displays the first few rows of each table to let you check your database.
